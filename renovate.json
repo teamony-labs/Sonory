@@ -3,11 +3,9 @@
    "extends": [
       "config:best-practices",
       ":semanticCommitTypeAll(chore)",
-      ":timezone(Asia/Tokyo)",
-      "schedule:weekly"
+      "github>teamony-labs/renovate-config"
    ],
    "labels": ["dependencies", "renovate"],
-   "prConcurrentLimit": 10,
    "rangeStrategy": "bump",
    "enabledManagers": [
       "npm",
@@ -33,63 +31,8 @@
          "enabled": false
       },
       {
-         "matchManagers": ["npm"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "npm dependencies"
-      },
-      {
-         "matchPackageNames": ["next", "react", "react-dom"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "frontend core"
-      },
-      {
-         "matchManagers": ["pep621"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "python packages"
-      },
-      {
-         "matchManagers": ["dockerfile", "docker-compose"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "docker images"
-      },
-      {
-         "matchPackageNames": ["oxlint", "oxfmt"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "code quality tools",
-         "automerge": true,
-         "minimumReleaseAge": "14 days"
-      },
-      {
-         "matchPackageNames": ["typescript", "@types/**"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "groupName": "typescript ecosystem",
-         "automerge": true,
-         "minimumReleaseAge": "14 days"
-      },
-      {
-         "matchManagers": ["github-actions"],
-         "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
-         "groupName": "github actions"
-      },
-      {
-         "matchManagers": ["github-actions"],
-         "matchUpdateTypes": ["minor", "patch"],
-         "automerge": true,
-         "minimumReleaseAge": "14 days"
-      },
-      {
-         "description": "SHA 固定にはリリース日時が無いので minimumReleaseAge を付けない（付けると永久に pending になる）",
-         "matchUpdateTypes": ["pinDigest"],
-         "automerge": true
-      },
-      {
          "description": "base-ui は RC のため、どの更新も破壊的になりうる。Dependency Dashboard で承認したものだけ PR にする",
          "matchPackageNames": ["@base-ui-components/react"],
-         "dependencyDashboardApproval": true
-      },
-      {
-         "description": "メジャー更新は Dependency Dashboard で承認したものだけ PR にする",
-         "matchUpdateTypes": ["major"],
          "dependencyDashboardApproval": true
       }
    ]
